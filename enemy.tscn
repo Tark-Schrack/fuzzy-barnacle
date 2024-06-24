@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3xvjg7bkn1id"]
+
+[ext_resource type="Texture2D" uid="uid://bxhh5kuqakprf" path="res://brackeys_platformer_assets/brackeys_platformer_assets/sprites/slime_purple.png" id="1_y4i5q"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_y703u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ycxf"]
+radius = 1.71429
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cb6n6"]
+atlas = ExtResource("1_y4i5q")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3key"]
+atlas = ExtResource("1_y4i5q")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmxq4"]
+atlas = ExtResource("1_y4i5q")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iucy"]
+atlas = ExtResource("1_y4i5q")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jfyi0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cb6n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3key")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmxq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iucy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vwh1"]
+radius = 17.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_y703u")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+scale = Vector2(2.33333, 1.95833)
+shape = SubResource("CircleShape2D_0ycxf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.38419e-07, -3)
+scale = Vector2(0.8125, 0.572917)
+sprite_frames = SubResource("SpriteFrames_jfyi0")
+autoplay = "default"
+frame = 3
+frame_progress = 0.501849
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5vwh1")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
